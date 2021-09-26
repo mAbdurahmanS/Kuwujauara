@@ -45,7 +45,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>Quick Monitor | KUWU JUARA</title>
+    <title>Dashboard</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -73,7 +73,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="dashboard.php" class="site_title"> <i class='bx bxs-pie-chart-alt-2'></i> <span>KUWU JUARA</span></a>
+              <a href="dashboard.php" class="site_title"> <i class='bx bxs-pie-chart-alt-2'></i> <span>KUWU JUARA/span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -111,16 +111,11 @@
                       <button type="button" class="btn btn-info dropdown-toggle mb-3 mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Kategori
                       </button>
-                      <div class="dropdown-menu">
-                          <a class="dropdown-item" href="qmonitor.php?count=<?=$quick['kategori']?>&qdesa=<?=$quick['desa']?>">Quick Count Kalideres</a>
-                          <a class="dropdown-item" href="qmonitor.php?count=<?=$real['kategori']?>&qdesa=<?=$real['desa']?>">Real Count Kalideres</a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="qmonitor.php?count=<?=$quick2['kategori']?>&qdesa=<?=$quick2['desa']?>">Quick Count Gegesik Kidul</a>
-                          <a class="dropdown-item" href="qmonitor.php?count=<?=$real2['kategori']?>&qdesa=<?=$real2['desa']?>">Real Count Gegesik Kidul</a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="qmonitor.php?count=<?=$quick3['kategori']?>&qdesa=<?=$quick3['desa']?>">Quick Count Panunggul</a>
-                          <a class="dropdown-item" href="qmonitor.php?count=<?=$real3['kategori']?>&qdesa=<?=$real3['desa']?>">Real Count Panunggul</a>
-                      </div>
+                    <!--  -->
+                          <div class="dropdown-menu">
+                              <a class="dropdown-item" href="qmonitor.php?count=<?=$quick["kategori"]?>&qdesa=<?=$quick["desa"]?>">Quick Count Kalideres</a>
+                              <a class="dropdown-item" href="qmonitor.php?count=<?=$real["kategori"]?>&qdesa=<?=$real["desa"]?>">Real Count Kalideres</a>  
+                            </div>
                     </div>
                   </div>
             </div>
@@ -155,34 +150,6 @@
                     <div class="col-md-12">
                       <h3><?=$_GET['qdesa'];?></h3>
                     </div>
-
-                    <!-- <div class="col-md-6">
-                      <h4>Kuwu 1 : 144</h4>
-                      <h5>Laki : 193</h5>
-                      <h5>Perempuan : 200</h5>
-                    </div>
-                    <div class="col-md-6">
-                      <h4>Kuwu 2 : 144</h4>
-                      <h5>Laki : 193</h5>
-                      <h5>Perempuan : 200</h5>
-                    </div>
-
-                    <div class="col-md-6">
-                      <h4>Kuwu 1 : 144</h4>
-                      <h5>Laki : 193</h5>
-                      <h5>Perempuan : 200</h5>
-                    </div>
-                    <div class="col-md-6">
-                      <h4>Kuwu 2 : 144</h4>
-                      <h5>Laki : 193</h5>
-                      <h5>Perempuan : 200</h5>
-                    </div>
-
-                    <div class="col-md-12">
-                      <h4>Kuwu 1 : 144</h4>
-                      <h5>Laki : 193</h5>
-                      <h5>Perempuan : 200</h5>
-                    </div> -->
 
                     <table>
                     <table id="tabell" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
@@ -329,7 +296,7 @@
       <!-- Kalideres Data -->
 
       <!-- QC Kalideres -->
-        <script type="text/javascript">
+      <script type="text/javascript">
           var ctx = document.getElementById("qc");
           var qc = new Chart(ctx, {
             type: 'pie',

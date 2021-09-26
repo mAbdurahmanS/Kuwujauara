@@ -12,9 +12,9 @@
                     </li>
                     <li><a ><i class='bx bx-slideshow' style="width: 20px;"></i> Perhitungan Cepat <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="quick.php?count=<?=$quick['kategori']?>&qdesa=<?=$quick['desa']?>">Quick Count</a></li>
-                        <li><a href="quick.php?count=<?=$real['kategori']?>&qdesa=<?=$real['desa']?>">Real Count</a></li>
-                        <li><a href="qmonitor.php?count=<?=$quick['kategori']?>&qdesa=<?=$quick['desa']?>">Monitoring</a></li>
+                        <li><a href="input_quick.php">Input Data</a></li>
+                        <li><a href="quick.php">Real Count</a></li>
+                        <li><a href="qmonitor.php">Monitoring</a></li>
                     </ul>
                     </li>
                     <li><a ><i class='bx bx-line-chart'  style="width: 20px;"></i> Anggaran Pembiayaan <span class="fa fa-chevron-down"></span></a>

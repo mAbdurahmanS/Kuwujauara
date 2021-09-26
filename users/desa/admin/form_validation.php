@@ -82,8 +82,7 @@
     input_tps = '$_POST[utps]',
     input_rt = '$_POST[urt]',
     input_rw = '$_POST[urw]',
-    input_pilihan = '$_POST[upilihan]',
-    kode_pendaftar = '$username'
+    input_pilihan = '$_POST[upilihan]'
     WHERE id = '$id'
     ");
     $edit_run = mysqli_query($db, $edit);
