@@ -42,7 +42,8 @@
     tps = '$_POST[ttps]',
     laki = '$_POST[tlaki]',
     perempuan = '$_POST[tperempuan]',
-    id_calon = '$_POST[tcalon]',
+    id_calon = '$_POST[tcalon]',,
+    waktu = '$_POST[twaktu]',
     hasil = $a+$b
     ");
 
@@ -135,16 +136,16 @@
                 <div class="page-title">
                     <div class="title_left">
                       <h3>Perhitungan Cepat | Input Data</h3>
-                      <div class="btn-group">
-                      <button type="button" class="btn btn-info dropdown-toggle mb-3 mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Kategori
-                      </button>
-                          <div class="dropdown-menu">
-                              <a class="dropdown-item" href="input_quick.php?desa=1">Kalideres</a>  
-                              <a class="dropdown-item" href="input_quick.php?desa=2">Panunggul</a>  
-                              <a class="dropdown-item" href="input_quick.php?desa=3">Bayalangu Kidul</a>  
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-info dropdown-toggle mb-3 mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Kategori
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="input_quick.php?desa=1">Kalideres</a>  
+                                <a class="dropdown-item" href="input_quick.php?desa=2">Panunggul</a>  
+                                <a class="dropdown-item" href="input_quick.php?desa=3">Bayalangu Kidul</a>  
                             </div>
-                    </div>
+                        </div>
                     </div>
                 </div>
 
@@ -156,16 +157,17 @@
                       <div class="x_content">
                       <form action="" method="post">
 
-                        <!-- <div class="form-group">
+                        <div class="form-group">
                             <label>Waktu</label>
-                            <select name="tdesa" class="form-control" required>
+                            <select name="twaktu" class="form-control" required>
                             <option></option>
+                            <option value="10.00">10.00</option>
                             <option value="11.00">11.00</option>
+                            <option value="12.00">12.00</option>
                             <option value="01.00">01.00</option>
                             <option value="02.00">02.00</option>
-                            <option value="03.00">03.00</option>
                             </select>
-                        </div> -->
+                        </div>
 
                         <div class="form-group">
                             <label>TPS</label>

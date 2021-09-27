@@ -210,15 +210,19 @@
                 <div class="page-title">
                     <div class="title_left">
                       <h3>Perhitungan Cepat | <?=$_GET['count']?></h3>
-                    </div>
-
-                    <div class="title_right">
-                    <form action="" method="POST" class="d-flex">
-                        <input type="text" name="search" class="form-control" placeholder="Telusuri">
-                        <div class="input-group-append">
-                        <button type="submit" class="btn btn-outline-primary"><i class='bx bx-search' ></i></button>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-info dropdown-toggle mb-3 mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Kategori
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="quick.php?desa=1">Kalideres</a>  
+                            <a class="dropdown-item" href="quick.php?desa=2">Panunggul</a>  
+                            <a class="dropdown-item" href="quick.php?desa=3">Bayalangu Kidul</a>  
                         </div>
-                    </form>
+                      </div>
+                    </div>
+                    <div class="title_right">
+                    
                     </div>
                 </div>
 
@@ -394,31 +398,31 @@
                                     <?php
                                       $no = 1;
 
-                                      $tampil = mysqli_query($db, "SELECT * FROM tb_counting WHERE id_desa = 1");
+                                      $tampil = mysqli_query($db, "SELECT * FROM tb_hitung WHERE id_desa = '$_GET[desa]'");
                                       if (mysqli_num_rows($tampil)){
                                         while($data = mysqli_fetch_array($tampil)){
                                     ?>
                                       <tr>
                                           <td><?=$data['tps']?></td>
-                                          <td><?=$data['al']?></td>
-                                          <td><?=$data['ap']?></td>
-                                          <td><?=$data['ahasil']?></td>
+                                          <td><?=$data['laki']?></td>
+                                          <td><?=$data['perempuan']?></td>
+                                          <td><?=$data['hasil']?></td>
 
-                                          <td><?=$data['bl']?></td>
-                                          <td><?=$data['bp']?></td>
-                                          <td><?=$data['bhasil']?></td>
-
-                                          <td><?=$data['cl']?></td>
-                                          <td><?=$data['cp']?></td>
-                                          <td><?=$data['chasil']?></td>
-
-                                          <td><?=$data['dl']?></td>
-                                          <td><?=$data['dp']?></td>
-                                          <td><?=$data['dhasil']?></td>
-
-                                          <td><?=$data['el']?></td>
-                                          <td><?=$data['ep']?></td>
-                                          <td><?=$data['ehasil']?></td>
+                                          <td><?=$data['laki']?></td>
+                                          <td><?=$data['perempuan']?></td>
+                                          <td><?=$data['hasil']?></td>
+                                          
+                                          <td><?=$data['laki']?></td>
+                                          <td><?=$data['perempuan']?></td>
+                                          <td><?=$data['hasil']?></td>
+                                          
+                                          <td><?=$data['laki']?></td>
+                                          <td><?=$data['perempuan']?></td>
+                                          <td><?=$data['hasil']?></td>
+                                          
+                                          <td><?=$data['laki']?></td>
+                                          <td><?=$data['perempuan']?></td>
+                                          <td><?=$data['hasil']?></td>
                                       </tr>
 
                                       
@@ -542,7 +546,6 @@
                                       <th><?=$row13['total_el']?></th>
                                       <th><?=$row14['total_ep']?></th>
                                       <th><?=$row15['total_ehasil']?></th>
-                                      <th></th>
                                     </tr>
                                   </thead>
                               </table>

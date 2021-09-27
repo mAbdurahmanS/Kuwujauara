@@ -32,7 +32,7 @@
 
     // SUM
 
-        $bis = "SELECT sum(al) AS total_al FROM tb_counting WHERE id_desa = 1 ";
+        $bis = "SELECT sum(al) AS total_al  FROM tb_counting WHERE id_desa = 1 ";
         $stmt = $db->query($bis);
         $row1 = $stmt->fetch_assoc();
 

@@ -106,17 +106,17 @@
           <div class="right_col" role="main">
             <div class="page-title">
                   <div class="title_left">
-                    <h3><?=$_GET['count']?></h3>
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-info dropdown-toggle mb-3 mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Kategori
-                      </button>
-                    <!--  -->
-                          <div class="dropdown-menu">
-                              <a class="dropdown-item" href="qmonitor.php?count=<?=$quick["kategori"]?>&qdesa=<?=$quick["desa"]?>">Quick Count Kalideres</a>
-                              <a class="dropdown-item" href="qmonitor.php?count=<?=$real["kategori"]?>&qdesa=<?=$real["desa"]?>">Real Count Kalideres</a>  
-                            </div>
-                    </div>
+                    <h3><?=$_GET['desa']?></h3>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-info dropdown-toggle mb-3 mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Kategori
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="qmonitor.php?desa=1">Kalideres</a>  
+                            <a class="dropdown-item" href="qmonitor.php?desa=2">Panunggul</a>  
+                            <a class="dropdown-item" href="qmonitor.php?desa=3">Bayalangu Kidul</a>  
+                        </div>
+                      </div>
                   </div>
             </div>
 
@@ -164,41 +164,48 @@
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <th>1</th>
-                                <td><?=$datam['kuwu1']?></td>
-                                <td><?=$row['total_al']?></td>
-                                <td><?=$row2['total_ap']?></td>
-                                <td><?=$row3['total_ahasil']?></td>                                
-                            </tr>
-                            <tr>
-                                <th>2</th>
-                                <td><?=$datam['kuwu2']?></td>
-                                <td><?=$row4['total_bl']?></td>
-                                <td><?=$row5['total_bp']?></td>
-                                <td><?=$row6['total_bhasil']?></td>                              
-                            </tr>
-                            <tr>
-                                <th>3</th>
-                                <td><?=$datam['kuwu3']?></td>
-                                <td><?=$row7['total_cl']?></td>
-                                <td><?=$row8['total_cp']?></td>
-                                <td><?=$row9['total_chasil']?></td>                                
-                            </tr>
-                            <tr>
-                                <th>4</th>
-                                <td><?=$datam['kuwu4']?></td>
-                                <td><?=$row10['total_dl']?></td>
-                                <td><?=$row11['total_dp']?></td>
-                                <td><?=$row12['total_dhasil']?></td>                               
-                            </tr>
-                            <tr>
-                                <th>5</th>
-                                <td><?=$datam['kuwu5']?></td>
-                                <td><?=$row13['total_el']?></td>
-                                <td><?=$row14['total_ep']?></td>
-                                <td><?=$row15['total_ehasil']?></td>                               
-                            </tr>
+                        <?php
+                          $no = 1;
+
+                          $tampil = mysqli_query($db, "SELECT * FROM tb_calon 
+                          INNER JOIN tb_desa ON tb_calon.id_desa = tb_desa.id_desa");
+                            while($data = mysqli_fetch_array($tampil)){
+                        ?>
+                          <tr>
+                              <td><?=$no++?></td>
+                              <td><?=$data['nama_calon']?></td>
+                              <td>
+                                <?php 
+                                  $sql_laki = mysqli_query($db, "SELECT sum(laki) AS jlaki from tb_hitung WHERE id_calon = '$data[id_calon]' ");
+                                  while ($data_laki = mysqli_fetch_array($sql_laki))
+                                  {
+                                    echo $data_laki['jlaki'];
+                                  }
+                                ?>
+                              </td>
+                              <td>
+                                <?php 
+                                  $sql_pr = mysqli_query($db, "SELECT sum(perempuan) AS jperempuan from tb_hitung WHERE id_calon = '$data[id_calon]' ");
+                                  while ($data_pr = mysqli_fetch_array($sql_pr))
+                                  {
+                                    echo $data_pr['jperempuan'];
+                                  }
+                                ?>
+                                </td>
+                              <td>
+                                <?php 
+                                  $sql_hasil = mysqli_query($db, "SELECT sum(hasil) AS jhasil from tb_hitung WHERE id_calon = '$data[id_calon]' ");
+                                  while ($data_hasil = mysqli_fetch_array($sql_hasil))
+                                  {
+                                    echo $data_hasil['jhasil'];
+                                  }
+                                ?>
+                              </td>
+                          </tr>
+
+                          <?php
+                            }
+                          ?>
                         </tbody>
                 
                       </table>
