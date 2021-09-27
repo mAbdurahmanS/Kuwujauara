@@ -211,8 +211,8 @@
                     <div class="title_left">
                       <h3>Perhitungan Cepat | <?=$_GET['count']?></h3>
                       <div class="btn-group">
-                        <button type="button" class="btn btn-info dropdown-toggle mb-3 mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Kategori
+                        <button type="button" class="btn btn-success dropdown-toggle mb-3 mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Desa
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="quick.php?desa=1">Kalideres</a>  
@@ -374,11 +374,11 @@
                                       <th >L</th>
                                       <th >P</th>
                                       <th >J</th>
-
+                                      
                                       <th >L</th>
                                       <th >P</th>
                                       <th >J</th>
-
+                                      
                                       <th >L</th>
                                       <th >P</th>
                                       <th >J</th>
@@ -398,156 +398,90 @@
                                     <?php
                                       $no = 1;
 
-                                      $tampil = mysqli_query($db, "SELECT * FROM tb_hitung WHERE id_desa = '$_GET[desa]'");
+                                      $tampil = mysqli_query($db, "SELECT * FROM tb_tps WHERE id_desa = '$_GET[desa]'");
                                       if (mysqli_num_rows($tampil)){
                                         while($data = mysqli_fetch_array($tampil)){
                                     ?>
                                       <tr>
-                                          <td><?=$data['tps']?></td>
-                                          <td><?=$data['laki']?></td>
-                                          <td><?=$data['perempuan']?></td>
-                                          <td><?=$data['hasil']?></td>
+                                        <td><?=$data['id_tps']?></td>
+                                        <td>
+                                          <?php 
+                                            $sql_laki = mysqli_query($db, "SELECT sum(laki) AS hlaki from tb_hitung WHERE id_calon = '1' and tps = '$data[id_tps]' ");
+                                            while ($data_laki = mysqli_fetch_array($sql_laki))
+                                            {
+                                              echo $data_laki['hlaki'];
+                                            }
+                                          ?>
+                                        </td>
+                                        <td>
+                                          <?php 
+                                            $sql_pr = mysqli_query($db, "SELECT sum(perempuan) AS hpr from tb_hitung WHERE id_calon = '1' and tps = '$data[id_tps]' ");
+                                            while ($data_pr = mysqli_fetch_array($sql_pr))
+                                            {
+                                              echo $data_pr['hpr'];
+                                            }
+                                          ?>
+                                        </td>
+                                        <td>
+                                          <?php 
+                                            $sql_hasil = mysqli_query($db, "SELECT sum(hasil) AS hhasil from tb_hitung WHERE id_calon = '1' and tps = '$data[id_tps]' ");
+                                            while ($data_hasil = mysqli_fetch_array($sql_hasil))
+                                            {
+                                              echo $data_hasil['hhasil'];
+                                            }
+                                          ?>
+                                        </td>
 
-                                          <td><?=$data['laki']?></td>
-                                          <td><?=$data['perempuan']?></td>
-                                          <td><?=$data['hasil']?></td>
-                                          
-                                          <td><?=$data['laki']?></td>
-                                          <td><?=$data['perempuan']?></td>
-                                          <td><?=$data['hasil']?></td>
-                                          
-                                          <td><?=$data['laki']?></td>
-                                          <td><?=$data['perempuan']?></td>
-                                          <td><?=$data['hasil']?></td>
-                                          
-                                          <td><?=$data['laki']?></td>
-                                          <td><?=$data['perempuan']?></td>
-                                          <td><?=$data['hasil']?></td>
+                                        <td>
+                                          <?php 
+                                            $sql_laki = mysqli_query($db, "SELECT sum(laki) AS hlaki from tb_hitung WHERE id_calon = '2' and tps = '$data[id_tps]' ");
+                                            while ($data_laki = mysqli_fetch_array($sql_laki))
+                                            {
+                                              echo $data_laki['hlaki'];
+                                            }
+                                          ?>
+                                        </td>
+                                        <td>
+                                          <?php 
+                                            $sql_pr = mysqli_query($db, "SELECT sum(perempuan) AS hpr from tb_hitung WHERE id_calon = '2' and tps = '$data[id_tps]' ");
+                                            while ($data_pr = mysqli_fetch_array($sql_pr))
+                                            {
+                                              echo $data_pr['hpr'];
+                                            }
+                                          ?>
+                                        </td>
+                                        <td>
+                                          <?php 
+                                            $sql_hasil = mysqli_query($db, "SELECT sum(hasil) AS hhasil from tb_hitung WHERE id_calon = '2' and tps = '$data[id_tps]' ");
+                                            while ($data_hasil = mysqli_fetch_array($sql_hasil))
+                                            {
+                                              echo $data_hasil['hhasil'];
+                                            }
+                                          ?>
+                                        </td>
+
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                        
                                       </tr>
 
-                                      
-                                      
-                                      <!-- Edit Tambah Data -->
-                                        <div class="modal fade" id="editmodal<?=$data['id']?>" tabindex="-1" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                </div>
-
-                                                <div class="modal-body">
-
-                                                <form action="" method="post">
-
-                                                <?php
-                                                $id = $data['id'];
-                                                $query_edit = mysqli_query($db, "SELECT * FROM tb_counting WHERE id = '$id' ");
-                                                while ($row = mysqli_fetch_array($query_edit))
-                                                {?>
-
-                                                    <input type="hidden" name="update_id" value="<?=$row['id']?>">
-
-                                                    <h6 class="text-dark font-weight-bold">Calon 1</h6>
-
-                                                    <div class="form-group">
-                                                        <label>Laki-laki</label>
-                                                        <input type="number" name="ual" value="<?=$row['al']?>" class="form-control" >
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Perempuan</label>
-                                                        <input type="number" value="<?=$row['ap']?>" name="uap" class="form-control">
-                                                    </div>
-
-                                                    <h6 class="text-dark font-weight-bold mt-4">Calon 2</h6>
-
-                                                    <div class="form-group">
-                                                        <label>Laki-laki</label>
-                                                        <input type="number" value="<?=$row['bl']?>" name="ubl" class="form-control" >
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Perempuan</label>
-                                                        <input type="number" value="<?=$row['bp']?>" name="ubp" class="form-control">
-                                                    </div>
-
-                                                    <h6 class="text-dark font-weight-bold mt-4">Calon 3</h6>
-
-                                                    <div class="form-group">
-                                                        <label>Laki-laki</label>
-                                                        <input type="number" value="<?=$row['cl']?>" name="ucl" class="form-control" >
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Perempuan</label>
-                                                        <input type="number" value="<?=$row['cp']?>" name="ucp" class="form-control">
-                                                    </div>
-
-                                                    <h6 class="text-dark font-weight-bold mt-4">Calon 4</h6>
-
-                                                    <div class="form-group">
-                                                        <label>Laki-laki</label>
-                                                        <input type="number" value="<?=$row['dl']?>" name="udl" class="form-control" >
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Perempuan</label>
-                                                        <input type="number" value="<?=$row['dp']?>" name="udp" class="form-control">
-                                                    </div>
-                                                    
-                                                    <h6 class="text-dark font-weight-bold mt-4">Calon 5</h6>
-
-                                                    <div class="form-group">
-                                                        <label>Laki-laki</label>
-                                                        <input type="number" value="<?=$row['el']?>" name="uel" class="form-control" >
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Perempuan</label>
-                                                        <input type="number" value="<?=$row['ep']?>" name="uep" class="form-control">
-                                                    </div>
-                                                                                                        
-                                                    <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                    <button type="submit" class="btn btn-primary" name="updatedata">Simpan</button>
-                                                    </div>    
-                                                </form>
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </div>
+                                    
                                     <?php 
-                                                }
                                       }
                                     }
-
                                     ?>
                                   </tbody>
 
-
-                                  <thead>
-                                    <tr>
-                                      <th>Total</th>
-                                      <th><?=$row1['total_al']?></th>
-                                      <th><?=$row2['total_ap']?></th>
-                                      <th><?=$row3['total_ahasil']?></th>
-                                      <th><?=$row4['total_bl']?></th>
-                                      <th><?=$row5['total_bp']?></th>
-                                      <th><?=$row6['total_bhasil']?></th>
-                                      <th><?=$row7['total_cl']?></th>
-                                      <th><?=$row8['total_cp']?></th>
-                                      <th><?=$row9['total_chasil']?></th>
-                                      <th><?=$row10['total_dl']?></th>
-                                      <th><?=$row11['total_dp']?></th>
-                                      <th><?=$row12['total_dhasil']?></th>
-                                      <th><?=$row13['total_el']?></th>
-                                      <th><?=$row14['total_ep']?></th>
-                                      <th><?=$row15['total_ehasil']?></th>
-                                    </tr>
-                                  </thead>
                               </table>
                             </div>
                           </div>

@@ -106,10 +106,10 @@
           <div class="right_col" role="main">
             <div class="page-title">
                   <div class="title_left">
-                    <h3><?=$_GET['desa']?></h3>
+                    <h3>Perhitungan Cepat | Monitor</h3>
                       <div class="btn-group">
-                        <button type="button" class="btn btn-info dropdown-toggle mb-3 mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Kategori
+                        <button type="button" class="btn btn-success dropdown-toggle mb-3 mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Desa
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="qmonitor.php?desa=1">Kalideres</a>  
@@ -133,7 +133,7 @@
                 <div class="col-md-6 col-sm-6 ">
                   <div class="dashboard_graph x_panel">
                     <div class="col-md-12">
-                      <h3><?=$_GET['qdesa'];?> | Pie Chart</h3>
+                      <h3>Pie Chart</h3>
                     </div>
                     <div class="x_content">
                       <table class="" style="width:100%">
@@ -217,11 +217,11 @@
               </div>
 
             <!-- Total Data -->
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-md-12 col-sm-12 ">
                   <div class="dashboard_graph x_panel">
                     <div class="col-md-6">
-                      <h3>Desa <?=$_GET['qdesa'];?></h3>
+                      <h3>Bar Chart</h3>
                     </div>
                     <div class="x_content">
                       <table class="" style="width:100%">
@@ -230,7 +230,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             <!-- Total Data -->
 
           </div>
@@ -302,16 +302,24 @@
         </script>
       <!-- Kalideres Data -->
 
+      <?php
+        $qnama = mysqli_query($db, "SELECT nama_calon FROM tb_calon");
+        while ($name = mysqli_fetch_array($qnama))
+        {
+          echo $name['nama_calon'];
+        }
+      ?>
+
       <!-- QC Kalideres -->
       <script type="text/javascript">
           var ctx = document.getElementById("qc");
           var qc = new Chart(ctx, {
             type: 'pie',
             data: {
-              labels: ["<?=$datam['kuwu1']?>", "<?=$datam['kuwu2']?>", "<?=$datam['kuwu3']?>", "<?=$datam['kuwu4']?>", "<?=$datam['kuwu5']?>" ],
+              labels: ["Kadina", "Hj. Suherni" ],
               datasets: [{
                 label: '',
-                  data: [<?=$row3['total_ahasil']?>,<?=$row6['total_bhasil']?>, <?=$row9['total_chasil']?>, <?=$row12['total_dhasil']?>, <?=$row15['total_ehasil']?>],
+                  data: [<?=$calon_1['khasil']?>, <?=$calon_2['shasil']?>,],
                   backgroundColor: ['#007bff', '#dc3545', '#219653', '#F2C94C', '#9B51E0'],
               }],
             },

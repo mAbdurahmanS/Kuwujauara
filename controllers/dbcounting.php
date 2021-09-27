@@ -92,6 +92,12 @@
         $stmt15 = $db->query($bis15);
         $row15 = $stmt15->fetch_assoc();
 
+        $calon1 = mysqli_query($db, "SELECT sum(hasil) AS khasil FROM tb_hitung WHERE id_calon = 1");
+        $calon_1 = mysqli_fetch_assoc($calon1);
+
+        $calon2 = mysqli_query($db, "SELECT sum(hasil) AS shasil FROM tb_hitung WHERE id_calon = 2");
+        $calon_2 = mysqli_fetch_assoc($calon2);
+
     // SUM
 
     // Nama Kuwu

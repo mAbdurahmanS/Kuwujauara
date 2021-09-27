@@ -42,8 +42,9 @@
     tps = '$_POST[ttps]',
     laki = '$_POST[tlaki]',
     perempuan = '$_POST[tperempuan]',
-    id_calon = '$_POST[tcalon]',,
+    id_calon = '$_POST[tcalon]',
     waktu = '$_POST[twaktu]',
+    id_desa = '$_GET[desa]',
     hasil = $a+$b
     ");
 
@@ -51,13 +52,13 @@
     {
         echo "<script>
               alert('Simpan Data Sukses !');
-              document.location= 'input_quick.php';
+              document.location= 'input_quick.php?desa=$_GET[desa]';
             </script>";
     }else
     {
         echo "<script>
               alert('Simpan Data Gagal !');
-              document.location= 'input_quick.php';
+              document.location= 'input_quick.php?desa=$_GET[desa]';
             </script>";
     }
 
@@ -137,8 +138,8 @@
                     <div class="title_left">
                       <h3>Perhitungan Cepat | Input Data</h3>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-info dropdown-toggle mb-3 mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Kategori
+                            <button type="button" class="btn btn-success dropdown-toggle mb-3 mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Desa
                             </button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="input_quick.php?desa=1">Kalideres</a>  
@@ -161,11 +162,11 @@
                             <label>Waktu</label>
                             <select name="twaktu" class="form-control" required>
                             <option></option>
-                            <option value="10.00">10.00</option>
-                            <option value="11.00">11.00</option>
-                            <option value="12.00">12.00</option>
-                            <option value="01.00">01.00</option>
-                            <option value="02.00">02.00</option>
+                            <option value="10">10.00</option>
+                            <option value="11">11.00</option>
+                            <option value="12">12.00</option>
+                            <option value="01">01.00</option>
+                            <option value="02">02.00</option>
                             </select>
                         </div>
 
@@ -174,11 +175,11 @@
                             <select name="ttps" class="form-control" required>
                                 <option></option>
                                 <?php
-                                $q = mysqli_query($db, "SELECT * FROM tb_counting WHERE id_desa = '$_GET[desa]' ");
+                                $q = mysqli_query($db, "SELECT * FROM tb_tps WHERE id_desa = '$_GET[desa]' ");
                                 while ($qtps = mysqli_fetch_assoc($q))
                                 {
                                     echo '
-                                    <option value="'.$qtps['tps'].'">'.$qtps['tps'].'</option>';
+                                    <option value="'.$qtps['id_tps'].'">'.$qtps['id_tps'].'</option>';
                                 }
                                 
                                 ?>
@@ -194,7 +195,7 @@
                                 while ($qcalon = mysqli_fetch_assoc($q))
                                 {
                                     echo '
-                                    <option value="'.$qcalon['nama_calon'].'">'.$qcalon['nama_calon'].'</option>';
+                                    <option value="'.$qcalon['id_calon'].'">'.$qcalon['nama_calon'].'</option>';
                                 }
                                 
                                 ?>
@@ -203,12 +204,12 @@
 
                         <div class="form-group">
                             <label>Laki-laki</label>
-                            <input type="number" name="tlaki" name="tal" class="form-control" >
+                            <input type="number" name="tlaki" name="tal" class="form-control"required >
                         </div>
 
                         <div class="form-group">
                             <label>Perempuan</label>
-                            <input type="number" name="tperempuan" name="tap" class="form-control">
+                            <input type="number" name="tperempuan" name="tap" class="form-control" required>
                         </div>
                         
                         <div class="modal-footer">
