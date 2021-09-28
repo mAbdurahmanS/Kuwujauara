@@ -59,7 +59,7 @@
         el = '$_POST[tel]',
         ep = '$_POST[tep]',
         kategori = '$_POST[tkategori]',
-        desa = '$_POST[tdesa]',
+        id_desa = '$_POST[tdesa]',
         ahasil = $a+$b,
         bhasil = $c+$d,
         chasil = $e+$f,
@@ -73,24 +73,6 @@
   if(isset($_POST['updatedata']))
   {
     $id = $_POST['update_id'];
-    $utps = $_POST['utps'];
-    $ual = $_POST['ual'];
-    $uap = $_POST['uap'];
-    $ubl = $_POST['ubl'];
-    $ubp = $_POST['ubp'];
-    $ucl = $_POST['ucl'];
-    $ucp = $_POST['ucp'];
-    $udl = $_POST['udl'];
-    $udp = $_POST['udp'];
-    $uel = $_POST['uel'];
-    $uep = $_POST['uep'];
-    $ukategori = $_POST['ukategori'];
-    $udesa = $_POST['udesa'];
-    $uhasil1 = $_POST['uhasil1'];
-    $uhasil2 = $_POST['uhasil2'];
-    $uhasil3 = $_POST['uhasil3'];
-    $uhasil4 = $_POST['uhasil4'];
-    $uhasil5 = $_POST['uhasil5'];
 
     $a2 = $_POST['ual'];
     $b2 = $_POST['uap'];
@@ -105,7 +87,6 @@
 
     //Data akan diedit
     $edit = mysqli_query($db, "UPDATE tb_counting set
-    tps = '$_POST[utps]',
     al = '$_POST[ual]',
     ap = '$_POST[uap]',
     bl = '$_POST[ubl]',
@@ -116,8 +97,6 @@
     dp = '$_POST[udp]',
     el = '$_POST[uel]',
     ep = '$_POST[uep]',
-    kategori = '$_POST[ukategori]',
-    desa = '$_POST[udesa]',
     ahasil = $a2+$b2,
     bhasil = $c2+$d2,
     chasil = $e2+$f2,
@@ -126,6 +105,18 @@
     WHERE id = '$id'
     ");
     $edit_run = mysqli_query($db, $edit);
+
+    if ($edit) {
+      echo "<script>
+              alert('Edit Data Sukses!');
+              document.location= 'quick.php';
+            </script>";
+    }else{
+      echo "<script>
+              alert('Edit Data Gagal!');
+              document.location= 'quick.php';
+            </script>";
+    }
 
   }
 
@@ -136,12 +127,12 @@
   {
     //Persiapan hapus data
     $hapus = mysqli_query($db, "DELETE FROM tb_counting WHERE id = '$_GET[id]' ");
-    // if($hapus){
-    //   echo "<script>
-    //           alert('Hapus Data Sukses!');
-    //           document.location= 'form_validation.php?hal=edit&rt=$_GET[rt]&rw=$_GET[rw]';
-    //         </script>";
-    // }
+    if($hapus){
+      echo "<script>
+              alert('Hapus Data Sukses!');
+              document.location= 'quick.php';
+            </script>";
+    }
     
   }
   }
@@ -219,33 +210,19 @@
                 <div class="page-title">
                     <div class="title_left">
                       <h3>Perhitungan Cepat | <?=$_GET['count']?></h3>
-                      <button type="button" class="btn btn-success mb-3 mt-2" data-toggle="modal" data-target="#addmodal">
-                          Tambah Data
-                      </button>
                       <div class="btn-group">
-                        <button type="button" class="btn btn-info dropdown-toggle mb-3 mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Kategori
+                        <button type="button" class="btn btn-success dropdown-toggle mb-3 mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Desa
                         </button>
                         <div class="dropdown-menu">
-                          <a class="dropdown-item" href="quick.php?count=<?=$quick['kategori']?>&qdesa=<?=$quick['desa']?>">Quick Count Kalideres</a>
-                          <a class="dropdown-item" href="quick.php?count=<?=$real['kategori']?>&qdesa=<?=$real['desa']?>">Real Count Kalideres</a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="quick.php?count=<?=$quick2['kategori']?>&qdesa=<?=$quick2['desa']?>">Quick Count Gegesik Kidul</a>
-                          <a class="dropdown-item" href="quick.php?count=<?=$real2['kategori']?>&qdesa=<?=$real2['desa']?>">Real Count Gegesik Kidul</a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="quick.php?count=<?=$quick3['kategori']?>&qdesa=<?=$quick3['desa']?>">Quick Count Panunggul</a>
-                          <a class="dropdown-item" href="quick.php?count=<?=$real3['kategori']?>&qdesa=<?=$real3['desa']?>">Real Count Panunggul</a>
+                            <a class="dropdown-item" href="quick.php?desa=1">Kalideres</a>  
+                            <a class="dropdown-item" href="quick.php?desa=2">Panunggul</a>  
+                            <a class="dropdown-item" href="quick.php?desa=3">Bayalangu Kidul</a>  
                         </div>
                       </div>
                     </div>
-
                     <div class="title_right">
-                    <form action="" method="POST" class="d-flex">
-                        <input type="text" name="search" class="form-control" placeholder="Telusuri">
-                        <div class="input-group-append">
-                        <button type="submit" class="btn btn-outline-primary"><i class='bx bx-search' ></i></button>
-                        </div>
-                    </form>
+                    
                     </div>
                 </div>
 
@@ -264,31 +241,28 @@
 
                             <form action="" method="post">
 
-                                <div class="form-group">
-                                    <label>Desa</label>
-                                    <select name="tdesa" id="tdesa" class="form-control" required>
-                                        <option><?=$_GET['qdesa']?></option>
-                                        <option value="kalideres">Kalideres</option>
-                                        <option value="gegesik">Gegesik</option>
-                                        <option value="panunggul">Panunggul</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Kategori</label>
-                                    <select name="tkategori" id="tkategori" class="form-control" required>
-                                        <option><?=$_GET['count']?></option>
-                                        <option value="Quick Count">Quick Count</option>
-                                        <option value="Real Count">Real Count</option>
-                                    </select>
-                                </div>
+                              <div class="form-group">
+                                <label>Desa</label>
+                                <select name="tdesa" id="tdesa" class="form-control" required>
+                                  <option></option>
+                                    <?php
+                                      $q = mysqli_query($db, "SELECT * FROM tb_desa");
+                                      while ($qdesa = mysqli_fetch_assoc($q))
+                                      {
+                                        echo '
+                                        <option value="'.$qdesa['id_desa'].'">'.$qdesa['nama_desa'].'</option>';
+                                      }
+                                    
+                                    ?>
+                                </select>
+                              </div>
 
                                 <div class="form-group">
                                     <label>TPS</label>
                                     <input type="number" id="ttps" name="ttps" class="form-control" required>
                                 </div>
                                 
-                                <h6 class="text-dark font-weight-bold mt-4"><?=$datam['kuwu1']?></h6>
+                                <h6 class="text-dark font-weight-bold mt-4">Calon 1</h6>
 
                                 <div class="form-group">
                                     <label>Laki-laki</label>
@@ -302,7 +276,7 @@
 
                                 <input type="hidden" name="thasil1" id="thasil1" value="<?=$hasil?>">
 
-                                <h6 class="text-dark font-weight-bold mt-4"><?=$datam['kuwu2']?></h6>
+                                <h6 class="text-dark font-weight-bold mt-4">Calon 2</h6>
 
                                 <div class="form-group">
                                     <label>Laki-laki</label>
@@ -316,7 +290,7 @@
 
                                 <input type="hidden" name="thasil2" id="thasil2">
 
-                                <h6 class="text-dark font-weight-bold mt-4"><?=$datam['kuwu3']?></h6>
+                                <h6 class="text-dark font-weight-bold mt-4">Calon 3</h6>
 
                                 <div class="form-group">
                                     <label>Laki-laki</label>
@@ -330,7 +304,7 @@
 
                                 <input type="hidden" name="thasil3" id="thasil3">
 
-                                <h6 class="text-dark font-weight-bold mt-4"><?=$datam['kuwu4']?></h6>
+                                <h6 class="text-dark font-weight-bold mt-4">Calon 4</h6>
 
                                 <div class="form-group">
                                     <label>Laki-laki</label>
@@ -344,7 +318,7 @@
                                 
                                 <input type="hidden" name="thasil4" id="thasil4">
 
-                                <h6 class="text-dark font-weight-bold mt-4"><?=$datam['kuwu5']?></h6>
+                                <h6 class="text-dark font-weight-bold mt-4">Calon 5</h6>
 
                                 <div class="form-group">
                                     <label>Laki-laki</label>
@@ -368,274 +342,155 @@
                         </div>
                     </div>
 
-                    <!-- Modal Edit Data -->
-                    <div class="modal fade" id="editmodal" tabindex="-1" aria-labelledby="editmodalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
-
-                            <div class="modal-body">
-
-                            <form action="" method="post">
-                                <input type="hidden" name="update_id" id="update_id">
-
-                                <div class="form-group">
-                                    <label>Desa</label>
-                                    <select name="udesa" id="udesa" class="form-control" required>
-                                        <option></option>
-                                        <option value="kalideres">Kalideres</option>
-                                        <option value="gegesik">Gegesik</option>
-                                        <option value="panunggul">Panunggul</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Kategori</label>
-                                    <select name="ukategori" id="ukategori" class="form-control" required>
-                                        <option></option>
-                                        <option value="Quick Count">Quick Count</option>
-                                        <option value="Real Count">Real Count</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>TPS</label>
-                                    <input type="number" id="utps" name="utps" class="form-control" required>
-                                </div>
-                                
-                                <h6 class="text-dark font-weight-bold mt-4"><?=$datam['kuwu1']?></h6>
-
-                                <div class="form-group">
-                                    <label>Laki-laki</label>
-                                    <input type="number" id="ual" name="ual" class="form-control" >
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Perempuan</label>
-                                    <input type="number" id="uap" name="uap" class="form-control">
-                                </div>
-
-                                <input type="hidden" name="uhasil1" id="uhasil1">
-
-                                <h6 class="text-dark font-weight-bold mt-4"><?=$datam['kuwu2']?></h6>
-
-                                <div class="form-group">
-                                    <label>Laki-laki</label>
-                                    <input type="number" id="ubl" name="ubl" class="form-control" >
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Perempuan</label>
-                                    <input type="number" id="ubp" name="ubp" class="form-control">
-                                </div>
-
-                                <input type="hidden" name="uhasil2" id="uhasil2">
-
-                                <h6 class="text-dark font-weight-bold mt-4"><?=$datam['kuwu3']?></h6>
-
-                                <div class="form-group">
-                                    <label>Laki-laki</label>
-                                    <input type="number" id="ucl" name="ucl" class="form-control" >
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Perempuan</label>
-                                    <input type="number" id="ucp" name="ucp" class="form-control">
-                                </div>
-                                
-                                <input type="hidden" name="uhasil3" id="uhasil3">
-
-                                <h6 class="text-dark font-weight-bold mt-4"><?=$datam['kuwu4']?></h6>
-
-                                <div class="form-group">
-                                    <label>Laki-laki</label>
-                                    <input type="number" id="udl" name="udl" class="form-control" >
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Perempuan</label>
-                                    <input type="number" id="udp" name="udp" class="form-control">
-                                </div>
-                                
-                                <input type="hidden" name="uhasil4" id="uhasil4">
-
-                                <h6 class="text-dark font-weight-bold mt-4"><?=$datam['kuwu5']?></h6>
-
-                                <div class="form-group">
-                                    <label>Laki-laki</label>
-                                    <input type="number" id="uel" name="uel" class="form-control" >
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Perempuan</label>
-                                    <input type="number" id="uep" name="uep" class="form-control">
-                                </div>
-                                
-                                <input type="hidden" name="uhasil5" id="uhasil5">
-                                
-                                <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary" name="updatedata">Simpan</button>
-                                </div>    
-                            </form>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-
                 <div class="clearfix"></div>
 
                 <div class="row">
-                    <div class="col-md-12 col-sm-12 ">
+                  <div class="col-md-12 col-sm-12 ">
                     <div class="x_panel">
-                        <div class="x_title">
-                        <h2><?=$_GET['qdesa'];?></h2>
+                      <div class="x_title">
                         <div class="clearfix"></div>
+                      </div>
+                      <div class="x_content">
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <div class="card-box table-responsive">
+                              <table id="tabell" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                  <thead>
+                                    <th></th>
+                                    <?php
+                                      $qnama = mysqli_query($db, "SELECT * FROM tb_calon");
+                                      while ($name = mysqli_fetch_array($qnama))
+                                      {
+                                        ?>
+                                          <th colspan="3"><?=$name['nama_calon']?></th>
+
+                                        <?php
+                                      }
+                                    ?>
+
+                                    <tr>
+                                      <th>TPS</th>
+                                      
+                                      <th >L</th>
+                                      <th >P</th>
+                                      <th >J</th>
+                                      
+                                      <th >L</th>
+                                      <th >P</th>
+                                      <th >J</th>
+                                      
+                                      <th >L</th>
+                                      <th >P</th>
+                                      <th >J</th>
+
+                                      <th >L</th>
+                                      <th >P</th>
+                                      <th >J</th>
+
+                                      <th >L</th>
+                                      <th >P</th>
+                                      <th >J</th>
+                                    </tr>
+
+                                  </thead>
+
+                                  <tbody>
+                                    <?php
+                                      $no = 1;
+
+                                      $tampil = mysqli_query($db, "SELECT * FROM tb_tps WHERE id_desa = '$_GET[desa]'");
+                                      if (mysqli_num_rows($tampil)){
+                                        while($data = mysqli_fetch_array($tampil)){
+                                    ?>
+                                      <tr>
+                                        <td><?=$data['id_tps']?></td>
+                                        <td>
+                                          <?php 
+                                            $sql_laki = mysqli_query($db, "SELECT sum(laki) AS hlaki from tb_hitung WHERE id_calon = '1' and tps = '$data[id_tps]' ");
+                                            while ($data_laki = mysqli_fetch_array($sql_laki))
+                                            {
+                                              echo $data_laki['hlaki'];
+                                            }
+                                          ?>
+                                        </td>
+                                        <td>
+                                          <?php 
+                                            $sql_pr = mysqli_query($db, "SELECT sum(perempuan) AS hpr from tb_hitung WHERE id_calon = '1' and tps = '$data[id_tps]' ");
+                                            while ($data_pr = mysqli_fetch_array($sql_pr))
+                                            {
+                                              echo $data_pr['hpr'];
+                                            }
+                                          ?>
+                                        </td>
+                                        <td>
+                                          <?php 
+                                            $sql_hasil = mysqli_query($db, "SELECT sum(hasil) AS hhasil from tb_hitung WHERE id_calon = '1' and tps = '$data[id_tps]' ");
+                                            while ($data_hasil = mysqli_fetch_array($sql_hasil))
+                                            {
+                                              echo $data_hasil['hhasil'];
+                                            }
+                                          ?>
+                                        </td>
+
+                                        <td>
+                                          <?php 
+                                            $sql_laki = mysqli_query($db, "SELECT sum(laki) AS hlaki from tb_hitung WHERE id_calon = '2' and tps = '$data[id_tps]' ");
+                                            while ($data_laki = mysqli_fetch_array($sql_laki))
+                                            {
+                                              echo $data_laki['hlaki'];
+                                            }
+                                          ?>
+                                        </td>
+                                        <td>
+                                          <?php 
+                                            $sql_pr = mysqli_query($db, "SELECT sum(perempuan) AS hpr from tb_hitung WHERE id_calon = '2' and tps = '$data[id_tps]' ");
+                                            while ($data_pr = mysqli_fetch_array($sql_pr))
+                                            {
+                                              echo $data_pr['hpr'];
+                                            }
+                                          ?>
+                                        </td>
+                                        <td>
+                                          <?php 
+                                            $sql_hasil = mysqli_query($db, "SELECT sum(hasil) AS hhasil from tb_hitung WHERE id_calon = '2' and tps = '$data[id_tps]' ");
+                                            while ($data_hasil = mysqli_fetch_array($sql_hasil))
+                                            {
+                                              echo $data_hasil['hhasil'];
+                                            }
+                                          ?>
+                                        </td>
+
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                        
+                                      </tr>
+
+                                    
+                                    <?php 
+                                      }
+                                    }
+                                    ?>
+                                  </tbody>
+
+                              </table>
+                            </div>
+                          </div>
                         </div>
-                        <div class="x_content">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                <div class="card-box table-responsive">
-                        <table id="tabell" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                            <thead>
-                              <tr>
-                                  <th></th>
-                                  <th colspan="3"><?=$datam['kuwu1']?></th>
-                                  <th colspan="3"><?=$datam['kuwu2']?></th>
-                                  <th colspan="3"><?=$datam['kuwu3']?></th>
-                                  <th colspan="3"><?=$datam['kuwu4']?></th>
-                                  <th colspan="3"><?=$datam['kuwu5']?></th>
-                                  <th>action</th>
-                              </tr>
-                              <tr>
-                                  <th>TPS</th>
-                                  <th >L</th>
-                                  <th >P</th>
-                                  <th >J</th>
-
-                                  <th >L</th>
-                                  <th >P</th>
-                                  <th >J</th>
-
-                                  <th >L</th>
-                                  <th >P</th>
-                                  <th >J</th>
-
-                                  <th >L</th>
-                                  <th >P</th>
-                                  <th >J</th>
-
-                                  <th >L</th>
-                                  <th >P</th>
-                                  <th >J</th>
-                                  <th></th>
-                              </tr>
-                            </thead>
-
-                            <?php
-                            $no = 1;
-
-                            $search = $_POST['search'];
-                            if($search != ''){
-                            $tampil = mysqli_query($db, "SELECT * FROM tb_counting WHERE tps LIKE '%".$search."%' OR al LIKE '%".$search."%' OR ap LIKE '%".$search."' ");
-                            }else{
-                            $tampil = mysqli_query($db, "SELECT * FROM tb_counting WHERE kategori = '$_GET[count]' and desa = '$_GET[qdesa]' ");
-                            }
-                            if (mysqli_num_rows($tampil)){
-                            while($data = mysqli_fetch_array($tampil)) :
-
-                            ?>
-
-                            <tbody>
-                              <tr>
-                                  <td><?=$data['tps']?></td>
-                                  <td><?=$data['al']?></td>
-                                  <td><?=$data['ap']?></td>
-                                  <td><?=$data['ahasil']?></td>
-
-                                  <td><?=$data['bl']?></td>
-                                  <td><?=$data['bp']?></td>
-                                  <td><?=$data['bhasil']?></td>
-
-                                  <td><?=$data['cl']?></td>
-                                  <td><?=$data['cp']?></td>
-                                  <td><?=$data['chasil']?></td>
-
-                                  <td><?=$data['dl']?></td>
-                                  <td><?=$data['dp']?></td>
-                                  <td><?=$data['dhasil']?></td>
-
-                                  <td><?=$data['el']?></td>
-                                  <td><?=$data['ep']?></td>
-                                  <td><?=$data['ehasil']?></td>
-
-                                  <td class="text-center">
-                                  <a data-toggle="modal" id="tombolubah" data-target="#editmodal" class="btn btn-warning btn_edit"
-                                  data-id ="<?= $data['id']?>"
-                                  data-kategori ="<?= $data['kategori']?>"
-                                  data-desa ="<?= $data['desa']?>"
-                                  data-tps ="<?= $data['tps']?>"
-                                  data-al ="<?= $data['al']?>"
-                                  data-ap ="<?= $data['ap']?>"
-                                  data-ahasil ="<?= $data['ahasil']?>"
-                                  data-bl ="<?= $data['bl']?>"
-                                  data-bp ="<?= $data['bp']?>"
-                                  data-bhasil ="<?= $data['bhasil']?>"
-                                  data-cl ="<?= $data['cl']?>"
-                                  data-cp ="<?= $data['cp']?>"
-                                  data-chasil ="<?= $data['chasil']?>"
-                                  data-dl ="<?= $data['dl']?>"
-                                  data-dp ="<?= $data['dp']?>"
-                                  data-dhasil ="<?= $data['dhasil']?>"
-                                  data-el ="<?= $data['el']?>"
-                                  data-ep ="<?= $data['ep']?>"
-                                  data-ehasil ="<?= $data['ehasil']?>"
-                                  ><i class='bx bx-edit' ></i></a>
-                                  <!-- <a href="quick.php?count=<?=$_GET['count']?>&hal=hapus&id=<?=$data['id']?>" onclick="return confirm('Apakah yakin ingin menghapus data ini?')" class="btn btn-danger"><i class='bx bx-trash' ></i></a> -->
-                                  </td>
-                              </tr>
-                            </tbody>
-                            <?php endwhile;}else{
-                            echo '<tr><td colspan="8">Tidak ada data :(</td></tr>';
-                            } 
-                            ?>
-
-                            <thead>
-                              <tr>
-                                <th>Total</th>
-                                <th><?=$row['total_al']?></th>
-                                <th><?=$row2['total_ap']?></th>
-                                <th><?=$row3['total_ahasil']?></th>
-                                <th><?=$row4['total_bl']?></th>
-                                <th><?=$row5['total_bp']?></th>
-                                <th><?=$row6['total_bhasil']?></th>
-                                <th><?=$row7['total_cl']?></th>
-                                <th><?=$row8['total_cp']?></th>
-                                <th><?=$row9['total_chasil']?></th>
-                                <th><?=$row10['total_dl']?></th>
-                                <th><?=$row11['total_dp']?></th>
-                                <th><?=$row12['total_dhasil']?></th>
-                                <th><?=$row13['total_el']?></th>
-                                <th><?=$row14['total_ep']?></th>
-                                <th><?=$row15['total_ehasil']?></th>
-                                <th></th>
-                              </tr>
-                            </thead>
-                        </table>
-                
-                        </div>
+                      </div>
                     </div>
-                    </div>
+                  </div>
                 </div>
-                    </div>
-                    </div>
-                </div>
-                </div>
+              </div>
             </div>
           <!-- /page content -->
 
@@ -724,51 +579,6 @@
       $(document).ready(function() {
         $('#tabell').DataTable();
       } );
-    </script>
-
-    <!-- Modal Edit -->
-    <script>
-      $(document).on("click", "#tombolubah", function() {
-        let id = $(this).data('id');
-        let kategori = $(this).data('kategori');
-        let desa = $(this).data('desa');
-        let tps = $(this).data('tps');
-        let al = $(this).data('al');
-        let ap = $(this).data('ap');
-        let ahasil = $(this).data('ahasil');
-        let bl = $(this).data('bl');
-        let bp = $(this).data('bp');
-        let bhasil = $(this).data('bhasil');
-        let cl = $(this).data('cl');
-        let cp = $(this).data('cp');
-        let chasil = $(this).data('chasil');
-        let dl = $(this).data('dl');
-        let dp = $(this).data('dp');
-        let dhasil = $(this).data('dhasil');
-        let el = $(this).data('el');
-        let ep = $(this).data('ep');
-        let ehasil = $(this).data('ehasil');
-
-        $("#update_id").val(id);
-        $("#ukategori").val(kategori);
-        $("#udesa").val(desa);
-        $("#utps").val(tps);
-        $("#ual").val(al);
-        $("#uap").val(ap);
-        $("#uhasil1").val(ahasil);
-        $("#ubl").val(bl);
-        $("#ubp").val(bp);
-        $("#uhasil2").val(bhasil);
-        $("#ucl").val(cl);
-        $("#ucp").val(cp);
-        $("#uhasil3").val(chasil);
-        $("#udl").val(dl);
-        $("#udp").val(dp);
-        $("#uhasil4").val(dhasil);
-        $("#uel").val(el);
-        $("#uep").val(ep);
-        $("#uhasil5").val(ehasil);
-      });
     </script>
 
     <!-- Result -->

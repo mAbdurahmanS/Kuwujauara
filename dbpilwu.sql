@@ -3112,7 +3112,13 @@ CREATE TABLE `tb_hitung` (
 INSERT INTO `tb_hitung` (`id`, `tps`, `laki`, `perempuan`, `hasil`, `id_calon`, `waktu`, `id_desa`) VALUES
 (1, 1, 25, 25, 50, 1, 0, 1),
 (2, 1, 30, 10, 40, 2, 0, 1),
+<<<<<<< HEAD
 (3, 3, 89, 923, 1012, 1, 0, 1);
+=======
+(3, 3, 89, 923, 1012, 1, 0, 1),
+(5, 2, 12, 14, 26, 1, 10, 1),
+(6, 1, 66, 34, 100, 1, 10, 1);
+>>>>>>> 7b8c1a0f4335bc01952e62e6b505278ae66079d3
 
 -- --------------------------------------------------------
 
@@ -3138,6 +3144,39 @@ INSERT INTO `tb_strategi` (`id`, `daerah`, `nama_file`, `link`, `status`, `bagia
 (10, 'kalideres', 'ABil', 'https://www.youtube.com/watch?v=oMTOSw4FqU0', 'berjalan', 'strategi'),
 (11, 'kalideres', 'asd', 'https://www.youtube.com/watch?v=oMTOSw4FqU0', 'persiapan', 'survei'),
 (15, 'kalideres', 'Muhammad', 'https://www.youtube.com/watch?v=oMTOSw4FqU0', 'berjalan', 'profil');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_tps`
+--
+
+CREATE TABLE `tb_tps` (
+  `id` int(11) NOT NULL,
+  `id_tps` int(11) NOT NULL,
+  `id_desa` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_tps`
+--
+
+INSERT INTO `tb_tps` (`id`, `id_tps`, `id_desa`) VALUES
+(1, 1, 1),
+(2, 2, 1),
+(3, 3, 1),
+(4, 4, 1),
+(5, 5, 1),
+(6, 6, 1),
+(7, 7, 1),
+(8, 8, 1),
+(9, 9, 1),
+(10, 10, 1),
+(11, 11, 1),
+(12, 12, 1),
+(13, 13, 1),
+(14, 14, 1),
+(15, 15, 1);
 
 -- --------------------------------------------------------
 
@@ -6103,6 +6142,12 @@ ALTER TABLE `tb_strategi`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `tb_tps`
+--
+ALTER TABLE `tb_tps`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `t_input_kalideres`
 --
 ALTER TABLE `t_input_kalideres`
@@ -6152,12 +6197,22 @@ ALTER TABLE `tb_desa`
 -- AUTO_INCREMENT untuk tabel `tb_hitung`
 --
 ALTER TABLE `tb_hitung`
+<<<<<<< HEAD
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+=======
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+>>>>>>> 7b8c1a0f4335bc01952e62e6b505278ae66079d3
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_strategi`
 --
 ALTER TABLE `tb_strategi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_tps`
+--
+ALTER TABLE `tb_tps`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --

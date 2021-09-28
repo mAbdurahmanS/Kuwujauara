@@ -45,7 +45,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>Quick Monitor | KUWU JUARA</title>
+    <title>Dashboard</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -73,7 +73,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="dashboard.php" class="site_title"> <i class='bx bxs-pie-chart-alt-2'></i> <span>KUWU JUARA</span></a>
+              <a href="dashboard.php" class="site_title"> <i class='bx bxs-pie-chart-alt-2'></i> <span>KUWU JUARA/span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -106,22 +106,17 @@
           <div class="right_col" role="main">
             <div class="page-title">
                   <div class="title_left">
-                    <h3><?=$_GET['count']?></h3>
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-info dropdown-toggle mb-3 mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Kategori
-                      </button>
-                      <div class="dropdown-menu">
-                          <a class="dropdown-item" href="qmonitor.php?count=<?=$quick['kategori']?>&qdesa=<?=$quick['desa']?>">Quick Count Kalideres</a>
-                          <a class="dropdown-item" href="qmonitor.php?count=<?=$real['kategori']?>&qdesa=<?=$real['desa']?>">Real Count Kalideres</a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="qmonitor.php?count=<?=$quick2['kategori']?>&qdesa=<?=$quick2['desa']?>">Quick Count Gegesik Kidul</a>
-                          <a class="dropdown-item" href="qmonitor.php?count=<?=$real2['kategori']?>&qdesa=<?=$real2['desa']?>">Real Count Gegesik Kidul</a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="qmonitor.php?count=<?=$quick3['kategori']?>&qdesa=<?=$quick3['desa']?>">Quick Count Panunggul</a>
-                          <a class="dropdown-item" href="qmonitor.php?count=<?=$real3['kategori']?>&qdesa=<?=$real3['desa']?>">Real Count Panunggul</a>
+                    <h3>Perhitungan Cepat | Monitor</h3>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success dropdown-toggle mb-3 mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Desa
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="qmonitor.php?desa=1">Kalideres</a>  
+                            <a class="dropdown-item" href="qmonitor.php?desa=2">Panunggul</a>  
+                            <a class="dropdown-item" href="qmonitor.php?desa=3">Bayalangu Kidul</a>  
+                        </div>
                       </div>
-                    </div>
                   </div>
             </div>
 
@@ -138,7 +133,7 @@
                 <div class="col-md-6 col-sm-6 ">
                   <div class="dashboard_graph x_panel">
                     <div class="col-md-12">
-                      <h3><?=$_GET['qdesa'];?> | Pie Chart</h3>
+                      <h3>Pie Chart</h3>
                     </div>
                     <div class="x_content">
                       <table class="" style="width:100%">
@@ -156,34 +151,6 @@
                       <h3><?=$_GET['qdesa'];?></h3>
                     </div>
 
-                    <!-- <div class="col-md-6">
-                      <h4>Kuwu 1 : 144</h4>
-                      <h5>Laki : 193</h5>
-                      <h5>Perempuan : 200</h5>
-                    </div>
-                    <div class="col-md-6">
-                      <h4>Kuwu 2 : 144</h4>
-                      <h5>Laki : 193</h5>
-                      <h5>Perempuan : 200</h5>
-                    </div>
-
-                    <div class="col-md-6">
-                      <h4>Kuwu 1 : 144</h4>
-                      <h5>Laki : 193</h5>
-                      <h5>Perempuan : 200</h5>
-                    </div>
-                    <div class="col-md-6">
-                      <h4>Kuwu 2 : 144</h4>
-                      <h5>Laki : 193</h5>
-                      <h5>Perempuan : 200</h5>
-                    </div>
-
-                    <div class="col-md-12">
-                      <h4>Kuwu 1 : 144</h4>
-                      <h5>Laki : 193</h5>
-                      <h5>Perempuan : 200</h5>
-                    </div> -->
-
                     <table>
                     <table id="tabell" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                         <thead>
@@ -197,41 +164,48 @@
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <th>1</th>
-                                <td><?=$datam['kuwu1']?></td>
-                                <td><?=$row['total_al']?></td>
-                                <td><?=$row2['total_ap']?></td>
-                                <td><?=$row3['total_ahasil']?></td>                                
-                            </tr>
-                            <tr>
-                                <th>2</th>
-                                <td><?=$datam['kuwu2']?></td>
-                                <td><?=$row4['total_bl']?></td>
-                                <td><?=$row5['total_bp']?></td>
-                                <td><?=$row6['total_bhasil']?></td>                              
-                            </tr>
-                            <tr>
-                                <th>3</th>
-                                <td><?=$datam['kuwu3']?></td>
-                                <td><?=$row7['total_cl']?></td>
-                                <td><?=$row8['total_cp']?></td>
-                                <td><?=$row9['total_chasil']?></td>                                
-                            </tr>
-                            <tr>
-                                <th>4</th>
-                                <td><?=$datam['kuwu4']?></td>
-                                <td><?=$row10['total_dl']?></td>
-                                <td><?=$row11['total_dp']?></td>
-                                <td><?=$row12['total_dhasil']?></td>                               
-                            </tr>
-                            <tr>
-                                <th>5</th>
-                                <td><?=$datam['kuwu5']?></td>
-                                <td><?=$row13['total_el']?></td>
-                                <td><?=$row14['total_ep']?></td>
-                                <td><?=$row15['total_ehasil']?></td>                               
-                            </tr>
+                        <?php
+                          $no = 1;
+
+                          $tampil = mysqli_query($db, "SELECT * FROM tb_calon 
+                          INNER JOIN tb_desa ON tb_calon.id_desa = tb_desa.id_desa");
+                            while($data = mysqli_fetch_array($tampil)){
+                        ?>
+                          <tr>
+                              <td><?=$no++?></td>
+                              <td><?=$data['nama_calon']?></td>
+                              <td>
+                                <?php 
+                                  $sql_laki = mysqli_query($db, "SELECT sum(laki) AS jlaki from tb_hitung WHERE id_calon = '$data[id_calon]' ");
+                                  while ($data_laki = mysqli_fetch_array($sql_laki))
+                                  {
+                                    echo $data_laki['jlaki'];
+                                  }
+                                ?>
+                              </td>
+                              <td>
+                                <?php 
+                                  $sql_pr = mysqli_query($db, "SELECT sum(perempuan) AS jperempuan from tb_hitung WHERE id_calon = '$data[id_calon]' ");
+                                  while ($data_pr = mysqli_fetch_array($sql_pr))
+                                  {
+                                    echo $data_pr['jperempuan'];
+                                  }
+                                ?>
+                                </td>
+                              <td>
+                                <?php 
+                                  $sql_hasil = mysqli_query($db, "SELECT sum(hasil) AS jhasil from tb_hitung WHERE id_calon = '$data[id_calon]' ");
+                                  while ($data_hasil = mysqli_fetch_array($sql_hasil))
+                                  {
+                                    echo $data_hasil['jhasil'];
+                                  }
+                                ?>
+                              </td>
+                          </tr>
+
+                          <?php
+                            }
+                          ?>
                         </tbody>
                 
                       </table>
@@ -243,11 +217,11 @@
               </div>
 
             <!-- Total Data -->
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-md-12 col-sm-12 ">
                   <div class="dashboard_graph x_panel">
                     <div class="col-md-6">
-                      <h3>Desa <?=$_GET['qdesa'];?></h3>
+                      <h3>Bar Chart</h3>
                     </div>
                     <div class="x_content">
                       <table class="" style="width:100%">
@@ -256,7 +230,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             <!-- Total Data -->
 
           </div>
@@ -328,16 +302,24 @@
         </script>
       <!-- Kalideres Data -->
 
+      <?php
+        $qnama = mysqli_query($db, "SELECT nama_calon FROM tb_calon");
+        while ($name = mysqli_fetch_array($qnama))
+        {
+          echo $name['nama_calon'];
+        }
+      ?>
+
       <!-- QC Kalideres -->
-        <script type="text/javascript">
+      <script type="text/javascript">
           var ctx = document.getElementById("qc");
           var qc = new Chart(ctx, {
             type: 'pie',
             data: {
-              labels: ["<?=$datam['kuwu1']?>", "<?=$datam['kuwu2']?>", "<?=$datam['kuwu3']?>", "<?=$datam['kuwu4']?>", "<?=$datam['kuwu5']?>" ],
+              labels: ["Kadina", "Hj. Suherni" ],
               datasets: [{
                 label: '',
-                  data: [<?=$row3['total_ahasil']?>,<?=$row6['total_bhasil']?>, <?=$row9['total_chasil']?>, <?=$row12['total_dhasil']?>, <?=$row15['total_ehasil']?>],
+                  data: [<?=$calon_1['khasil']?>, <?=$calon_2['shasil']?>,],
                   backgroundColor: ['#007bff', '#dc3545', '#219653', '#F2C94C', '#9B51E0'],
               }],
             },
